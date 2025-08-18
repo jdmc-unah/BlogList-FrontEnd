@@ -73,7 +73,7 @@ const Blog = ({ blog, likeBlog, deleteBlog }) => {
                 {blog.author[0]}
               </Avatar>
             }
-            
+             
             title={blog.title}
             subheader={blog.author}
             action={ 
