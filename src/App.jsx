@@ -8,7 +8,9 @@ import loginService from './services/login'
 import Blog from './components/Blog'
 import BlogForm from './components/BlogForm'
 import Toggable from './components/Toggable'
+import Notification from './components/Notification'
 
+import DropDownMenu from './components/DropDownMenu'
 
 //Estilos
 import Container from '@mui/material/Container';
@@ -19,37 +21,11 @@ import InputAdornment from '@mui/material/InputAdornment';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LockIcon from '@mui/icons-material/Lock';
 import Typography from '@mui/material/Typography';
-import Alert from '@mui/material/Alert';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-
-const Notification = ({ message , error }) => {
-  if (!message) {
-    return null
-  }
-  
-  return (
-    error ?
-     <Alert variant="filled" severity="error">
-        {message}
-      </Alert>
-
-
-    :
-      <Alert variant="filled" severity="success">
-        {message}
-      </Alert>
-
-
-
-  )
-}
-
-
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
 
 
 
@@ -86,7 +62,7 @@ const App = () => {
   const clearMessage = () =>{
     setTimeout(() => {
         setMessage(null)
-    }, 5000)
+    }, 3000)
   }
 
 
@@ -122,6 +98,9 @@ const App = () => {
   const loginForm = () => (
     
     <>
+      <Notification  message={message}  error= {errorMessage}/>
+
+
       <Container maxWidth="sm" >
       
       <Box
@@ -141,7 +120,6 @@ const App = () => {
         
         
       </Box>
-      <Notification  message={message}  error= {errorMessage}/>
       <Box
         onSubmit={handleLogin}
         component="form"
@@ -254,32 +232,25 @@ const App = () => {
 
   return (
     <>
+      
 
       { user === null ? loginForm() : 
         <div>
 
           <Box  
+            sx={{pl:2, pr:2}}
             display="flex"
-            justifyContent="space-around"
+            justifyContent="space-between"
             alignItems="center"
             minHeight="10vh" >
+            
               <Typography variant='h5' >Blog App</Typography>
-              <Typography variant='subtitle1' >Welcome {user.name}!</Typography>
+              {/* <Typography variant='subtitle1' >Welcome {user.name}!</Typography> */}
+              <DropDownMenu  handleLogOut={logout} uName={user.name} />
           </Box>
-
-          <Box  
-            display="flex"
-            justifyContent="end"
-            alignItems="center"
-            marginRight={2}
-            >
-              <Button endIcon={<LogoutIcon/>} variant='contained' size='small' onClick={logout} > Log out </Button> 
-          </Box>
-
           
           <Notification  message={message}  error= {errorMessage} />
 
-          
     
           {/*Muestra el form para crear los blogs nuevos  */}
           <Toggable  buttonLabel={'add new blog'}>

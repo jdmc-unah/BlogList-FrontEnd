@@ -45,14 +45,14 @@ const BlogForm = ({createBlog})=>{
         
         marginTop={3}        
       >       
-        <Typography variant="h6" textAlign='center' >Create New</Typography>
+        <Typography variant="h6" textAlign='center' >Add New Blog</Typography>
 
         <TextField label="Title" onChange={onChangeTitle}  variant="outlined" size='small' type="text"/>
 
         <TextField label="Author" onChange={onChangeAuthor} variant="outlined" size='small' type="text"/>
         <TextField label="Url" onChange={onChangeUrl} variant="outlined" size='small' type="text"/>
        
-        <Button variant="contained" type='submit' color="success">Create</Button>
+        <Button variant="contained" type='submit' color="success">Save</Button>
       </Box>
 
     </>
