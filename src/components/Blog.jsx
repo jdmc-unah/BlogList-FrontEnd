@@ -94,8 +94,8 @@ const Blog = ({ blog, likeBlog, deleteBlog }) => {
          <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardActions>
             <Box sx={{ flexGrow: 1 }} />
-            <Button href={blog.url} variant='outlined' size="small">Go to blog</Button>
-            <Button onClick={handleDeleteBlog}  variant='outlined' size="small">Delete</Button>
+            <Button href={blog.url} variant='outlined' size="small">Ir al blog</Button>
+            <Button onClick={handleDeleteBlog}  variant='outlined' size="small">Borrar</Button>
         </CardActions>
         </Collapse>
         

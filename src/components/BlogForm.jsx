@@ -42,17 +42,14 @@ const BlogForm = ({createBlog})=>{
         justifyContent="center"
         alignItems="center"
         minHeight="40vh"
-        
         marginTop={3}        
       >       
-        <Typography variant="h6" textAlign='center' >Add New Blog</Typography>
+        <TextField fullWidth label="Titulo" onChange={onChangeTitle}  variant="outlined" size='small' type="text"/>
 
-        <TextField label="Title" onChange={onChangeTitle}  variant="outlined" size='small' type="text"/>
-
-        <TextField label="Author" onChange={onChangeAuthor} variant="outlined" size='small' type="text"/>
-        <TextField label="Url" onChange={onChangeUrl} variant="outlined" size='small' type="text"/>
+        <TextField label="Autor" onChange={onChangeAuthor} variant="outlined" size='small' type="text"/>
+        <TextField label="Enlace" onChange={onChangeUrl} variant="outlined" size='small' type="text"/>
        
-        <Button variant="contained" type='submit' color="success">Save</Button>
+        <Button variant="contained" type='submit' color="success">Guardar</Button>
       </Box>
 
     </>

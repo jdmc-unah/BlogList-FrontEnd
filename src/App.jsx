@@ -21,12 +21,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LockIcon from '@mui/icons-material/Lock';
 import Typography from '@mui/material/Typography';
-import LogoutIcon from '@mui/icons-material/Logout';
-
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
 
 
 const App = () => {
@@ -98,10 +94,11 @@ const App = () => {
   const loginForm = () => (
     
     <>
+   
+      <Container maxWidth="sm">
+      
       <Notification  message={message}  error= {errorMessage}/>
 
-
-      <Container maxWidth="sm" >
       
       <Box
         display="flex"
@@ -111,11 +108,11 @@ const App = () => {
         marginTop={10}
       >
         <Typography variant="h4" gutterBottom>
-          Hello, <br /> Welcome Back!
+          Hola, <br /> Bienvenido!
         </Typography>
         
         <Typography variant="subtitle1" color='primary' gutterBottom>
-          We missed you very much!
+          Ingresa tus credenciales para empezar a navegar
         </Typography>
         
         
@@ -134,7 +131,7 @@ const App = () => {
         
         
       >
-        <TextField value={username} label="Username" onChange={({ target }) => setUsername(target.value)}
+        <TextField value={username} label="Usuario" onChange={({ target }) => setUsername(target.value)}
           name="Username"
           variant="outlined" 
           size='small'
@@ -151,7 +148,7 @@ const App = () => {
         />
 
       
-        <TextField value={password} label="Password" onChange={({ target }) => setPassword(target.value)}
+        <TextField value={password} label="Contraseña" onChange={({ target }) => setPassword(target.value)}
           name="Username"
           variant="outlined" 
           size='small'
@@ -167,7 +164,7 @@ const App = () => {
           }} 
         />
         
-        <Button variant="contained" type='submit'>Sign in</Button>
+        <Button variant="contained" type='submit'>Entrar</Button>
       </Box>
       </Container>
     </>    
@@ -236,24 +233,22 @@ const App = () => {
 
       { user === null ? loginForm() : 
         <div>
-
-          <Box  
-            sx={{pl:2, pr:2}}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            minHeight="10vh" >
-            
-              <Typography variant='h5' >Blog App</Typography>
-              {/* <Typography variant='subtitle1' >Welcome {user.name}!</Typography> */}
-              <DropDownMenu  handleLogOut={logout} uName={user.name} />
-          </Box>
           
-          <Notification  message={message}  error= {errorMessage} />
+          <AppBar position="fixed">
+            <Toolbar>
+              <Typography variant='h5' sx={{ flexGrow: 1 }} >Blog App</Typography>
+                      
 
+              <DropDownMenu  handleLogOut={logout} uName={user.name} />
+            </Toolbar>
+          </AppBar>
+          
+          <br /><br />
+
+          <Notification  message={message}  error= {errorMessage} />
     
           {/*Muestra el form para crear los blogs nuevos  */}
-          <Toggable  buttonLabel={'add new blog'}>
+          <Toggable  buttonLabel={'Agregar Nuevo Blog'}>
             
             <BlogForm  
               createBlog = {createBlog}
