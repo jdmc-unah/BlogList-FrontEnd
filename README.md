@@ -1,8 +1,20 @@
-# React + Vite
+# 🌐 Blog Frontend App — React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esta es una aplicación web desarrollada con **React** y **Vite** que consume una API REST para gestionar publicaciones de blog. Incluye autenticación de usuarios mediante **JWT**, permitiendo iniciar sesión, crear, editar y eliminar blogs desde una interfaz moderna y responsiva.
 
-Currently, two official plugins are available:
+## 🚀 Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🔐 Autenticación de usuarios (login y registro)
+- 📝 Visualización de blogs públicos
+- ✍️ Creación, edición y eliminación de blogs (solo usuarios autenticados)
+- ⚡ Interfaz rápida y ligera gracias a Vite
+- 🎨 Estilos modernos con Material UI
+
+## 🛠️ Tecnologías utilizadas
+
+- React
+- Vite
+- Axios (para llamadas HTTP)
+- React Router DOM
+- JWT (gestión de tokens en frontend)
+- Material UI
