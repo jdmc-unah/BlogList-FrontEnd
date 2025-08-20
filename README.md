@@ -6,7 +6,7 @@ Esta es una aplicación web desarrollada con **React** y **Vite** que consume un
 
 - 🔐 Autenticación de usuarios (login y registro)
 - 📝 Visualización de blogs públicos
-- ✍️ Creación, edición y eliminación de blogs (solo usuarios autenticados)
+- ✍️ Creación y eliminación de blogs (solo usuarios autenticados)
 - ⚡ Interfaz rápida y ligera gracias a Vite
 - 🎨 Estilos modernos con Material UI
 
