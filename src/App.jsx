@@ -23,6 +23,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import Typography from '@mui/material/Typography';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
+import Grid from '@mui/material/Grid'
 
 
 const App = () => {
@@ -186,6 +187,8 @@ const App = () => {
     setErrorMessage(false)
     clearMessage()
 
+    
+
    } catch (error) {
     setMessage('Debe llenar todos los campos')
     setErrorMessage(true)
@@ -246,7 +249,7 @@ const App = () => {
             </Toolbar>
           </AppBar>
           
-          <br /><br />
+          <br /><br /><br />
 
           <Notification  message={message}  error= {errorMessage} />
     
@@ -264,9 +267,27 @@ const App = () => {
 
          
           {/* Muestra los blogs */}
-          {blogs.map(blog =>
-            <Blog key={blog.id} blog={blog} likeBlog ={likeBlog} deleteBlog= {deleteBlog} />    
-          )}
+
+          <Grid
+            container
+            spacing={2}
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            alignContent="center"
+            wrap="wrap"
+            
+          >
+            
+              {blogs.map(blog =>
+                <Grid key={blog.id} size={{sm:6, lg: 4, md:6, xl: 4, xs: 12  }}  >
+                  <Blog key={blog.id} blog={blog} likeBlog ={likeBlog} deleteBlog= {deleteBlog} />    
+                </Grid>
+              )}
+            
+          </Grid>
+
+         
 
           
         

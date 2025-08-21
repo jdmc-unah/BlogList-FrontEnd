@@ -21,20 +21,20 @@ const Toggable = (props) => {
 
   return (
     <div>
-         <Box  
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-          marginTop={5}
-          >
-            {!visible ?  <Button  startIcon={<AddCircleOutlineIcon/>} variant='contained' size='small' color='warning' 
-            onClick={toggleVisibility}>Agregar Nuevo Blog</Button> : 
-            
-            <Button  startIcon={<HighlightOffIcon/>} variant='contained' size='small' color='error' 
-            onClick={toggleVisibility}>Cerrar</Button>  }
-            
-          </Box>
+        <Box  
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        marginTop={5}
+        >
+          {!visible ?  <Button  startIcon={<AddCircleOutlineIcon/>} variant='contained' size='small' color='warning' 
+          onClick={toggleVisibility}>Agregar Nuevo Blog</Button> : 
+          
+          <Button  startIcon={<HighlightOffIcon/>} variant='contained' size='small' color='error' 
+          onClick={toggleVisibility}>Cerrar</Button>  }
+          
+        </Box>
       <Collapse in={visible}>
         
           <Box  

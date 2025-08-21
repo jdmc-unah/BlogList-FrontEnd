@@ -21,6 +21,8 @@ import Avatar from '@mui/material/Avatar';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
+
+
 const Blog = ({ blog, likeBlog, deleteBlog }) => {
   const [expanded, setExpanded] = useState(false);
 
@@ -68,33 +70,53 @@ const Blog = ({ blog, likeBlog, deleteBlog }) => {
     
       <Card sx={{mb:1}} >
          <CardHeader
-            avatar={
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                {blog.author[0]}
-              </Avatar>
-            }
+            // avatar={
+            //   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+            //     {blog.author[0]}
+            //   </Avatar>
+            // }
              
             title={blog.title}
-            subheader={blog.author}
+            slotProps={{title:{ sx:{fontSize: '1.2rem' }            }}}
+            subheader={` ${blog.author} ` }
             action={ 
               <>
-                <IconButton color="error" size="small" aria-label="add to favorites" onClick={increaseLikes}>
-                  <FavoriteIcon />  {blog.likes}
-                </IconButton>
-                <ExpandMore
-                  expand={expanded}
-                  onClick={handleExpandClick}
-                  aria-expanded={expanded}
-                  aria-label="show more"
-                >
-                  <ExpandMoreIcon />
-              </ExpandMore>
+                <Box >
+                  
+                  <Box sx={{display:'flex'  }} >
+                    <IconButton color="error" size="small" aria-label="add to favorites" onClick={increaseLikes}>
+                      <FavoriteIcon />  {blog.likes}
+                    </IconButton>
+                    <ExpandMore
+                      expand={expanded}
+                      onClick={handleExpandClick}
+                      aria-expanded={expanded}
+                      aria-label="show more"
+                    >
+                      <ExpandMoreIcon />
+                    </ExpandMore>
+                  </Box>
+
+                  { !expanded &&
+                    <Box  sx={{  display:"flex" }}>
+                        <img style={{maxWidth: 110, height: 'auto'}}  src={blog.picUrl} alt={blog.title} />
+                    </Box>
+                  }
+                </Box>
               </>}
         />
+        
          <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent sx={{display:"flex", flexDirection:"column", alignItems:'center', justifyContent:'center' }}>
+            
+            <img style={{maxWidth: 325, height: 'auto'}}  src={blog.picUrl} alt={blog.title} /> <br />
+            <Typography variant="body2" color="text.secondary">{blog.description}</Typography>
+            
+          </CardContent>
           <CardActions>
+            <Typography variant="body2" color="text.secondary" textAlign={'center'} ><FavoriteIcon/>     Business </Typography>
             <Box sx={{ flexGrow: 1 }} />
-            <Button href={blog.url} variant='outlined' size="small">Ir al blog</Button>
+            <Button href={blog.url}  target="_blank" variant='outlined' size="small">Ir al blog</Button>
             <Button onClick={handleDeleteBlog}  variant='outlined' size="small">Borrar</Button>
         </CardActions>
         </Collapse>

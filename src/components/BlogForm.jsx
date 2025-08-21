@@ -22,17 +22,23 @@ const BlogForm = ({createBlog})=>{
     const onChangePicUrl= (event) => setPicUrl(event.target.value)
     const onChangeDesc= (event) => setDesc(event.target.value)
     
-    const addBlog = async (event)  =>  { 
+    const addBlog =  (event)  =>  { 
         event.preventDefault()
 
-        await createBlog ( {
+         createBlog ( {
             title: newTitle,
             author: newAuthor,
             url: newUrl,
             picUrl: picUrl,
             description: description
         })
-        
+
+        setNewTitle('')
+        setNewAuthor('')
+        setNewUrl('')
+        setPicUrl('')
+        setDesc('')
+
     
     }
     
@@ -52,11 +58,11 @@ const BlogForm = ({createBlog})=>{
         minHeight="40vh"
         marginTop={3}        
       >       
-        <TextField label="Titulo" onChange={onChangeTitle}  variant="outlined" size='small' type="text" multiline maxRows={2}/>
-        <TextField label="Autor" onChange={onChangeAuthor} variant="outlined" size='small' type="text"/>
-        <TextField label="Enlace" onChange={onChangeUrl} variant="outlined" size='small' type="text"  />
-        <TextField label="Url de Imagen" onChange={onChangePicUrl} variant="outlined" size='small' type="text"/>
-        <TextField label="Descripción" onChange={onChangeDesc} variant="outlined" size='small' type="text" multiline maxRows={4}/>
+        <TextField label="Titulo" value={newTitle} onChange={onChangeTitle}  variant="outlined" size='small' type="text" multiline maxRows={2}/>
+        <TextField label="Autor" value={newAuthor} onChange={onChangeAuthor} variant="outlined" size='small' type="text"/>
+        <TextField label="Enlace" value={newUrl} onChange={onChangeUrl} variant="outlined" size='small' type="text"  />
+        <TextField label="Url de Imagen" value={picUrl} onChange={onChangePicUrl} variant="outlined" size='small' type="text"/>
+        <TextField label="Descripción" value={description} onChange={onChangeDesc} variant="outlined" size='small' type="text" multiline maxRows={4}/>
        
         <Button variant="contained" type='submit' color="success">Guardar</Button>
       </Box>
