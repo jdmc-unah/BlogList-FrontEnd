@@ -17,9 +17,8 @@ import Button from '@mui/material/Button';
 //Iconos
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import Avatar from '@mui/material/Avatar';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
+import CategoryIcon from '@mui/icons-material/Category';
 
 
 
@@ -114,7 +113,8 @@ const Blog = ({ blog, likeBlog, deleteBlog }) => {
             
           </CardContent>
           <CardActions>
-            <Typography variant="body2" color="text.secondary" textAlign={'center'} ><FavoriteIcon/>     Business </Typography>
+            <CategoryIcon />  
+            <Typography variant="body2" color="text.secondary" textAlign={'center'} > {blog.category} </Typography>
             <Box sx={{ flexGrow: 1 }} />
             <Button href={blog.url}  target="_blank" variant='outlined' size="small">Ir al blog</Button>
             <Button onClick={handleDeleteBlog}  variant='outlined' size="small">Borrar</Button>

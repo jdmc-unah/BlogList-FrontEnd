@@ -10,8 +10,6 @@ import BlogForm from './components/BlogForm'
 import Toggable from './components/Toggable'
 import Notification from './components/Notification'
 
-import DropDownMenu from './components/DropDownMenu'
-
 //Estilos
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -21,10 +19,11 @@ import InputAdornment from '@mui/material/InputAdornment';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LockIcon from '@mui/icons-material/Lock';
 import Typography from '@mui/material/Typography';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
+
 import Grid from '@mui/material/Grid'
 
+
+import HomeAppBar from './components/HomeAppBar'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -231,9 +230,8 @@ const App = () => {
   const sortBlogs = (blogs)=>{
     return blogs.sort ( (a, b) => b.likes - a.likes ) 
   }
-  
 
- 
+
 
   return (
     <>
@@ -242,13 +240,8 @@ const App = () => {
       { user === null ? loginForm() : 
         <div>
           
-          <AppBar position="fixed">
-            <Toolbar>
-              <Typography variant='h5' sx={{ flexGrow: 1 }} >Blog App</Typography>
-              <DropDownMenu  handleLogOut={logout} uName={user.name} />
-            </Toolbar>
-          </AppBar>
-          
+         
+          <HomeAppBar logout={logout} userName={user.name} />
           <br /><br /><br />
 
           <Notification  message={message}  error= {errorMessage} />
