@@ -178,14 +178,19 @@ const App = () => {
 
 
   const createBlog = async (newBlog)=>{
-   
+   try {    
     const blogCreated = await blogService.create(newBlog)
-    
     setBlogs( sortBlogs( blogs.concat(blogCreated)) )
     
     setMessage('El blog fue creado con exito')
     setErrorMessage(false)
     clearMessage()
+
+   } catch (error) {
+    setMessage('Debe llenar todos los campos')
+    setErrorMessage(true)
+    clearMessage()
+   }
 
   }
   
@@ -237,8 +242,6 @@ const App = () => {
           <AppBar position="fixed">
             <Toolbar>
               <Typography variant='h5' sx={{ flexGrow: 1 }} >Blog App</Typography>
-                      
-
               <DropDownMenu  handleLogOut={logout} uName={user.name} />
             </Toolbar>
           </AppBar>

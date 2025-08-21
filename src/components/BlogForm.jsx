@@ -3,28 +3,36 @@ import { useState } from "react"
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import Typography from '@mui/material/Typography';
 
 const BlogForm = ({createBlog})=>{
     const [newTitle, setNewTitle ] = useState([])
     const [newAuthor, setNewAuthor ] = useState([])
     const [newUrl, setNewUrl ] = useState([])
-    
+
+    const [picUrl, setPicUrl ] = useState([])
+    const [description, setDesc ] = useState([])
+
+        
 
      //Actualiza los hooks 
     const onChangeTitle= (event) => setNewTitle(event.target.value)
     const onChangeAuthor= (event) => setNewAuthor(event.target.value)
     const onChangeUrl= (event) => setNewUrl(event.target.value)
+
+    const onChangePicUrl= (event) => setPicUrl(event.target.value)
+    const onChangeDesc= (event) => setDesc(event.target.value)
     
-    const addBlog = (event) => { 
+    const addBlog = async (event)  =>  { 
         event.preventDefault()
 
-        createBlog ( {
+        await createBlog ( {
             title: newTitle,
             author: newAuthor,
-            url: newUrl
+            url: newUrl,
+            picUrl: picUrl,
+            description: description
         })
+        
     
     }
     
@@ -44,10 +52,11 @@ const BlogForm = ({createBlog})=>{
         minHeight="40vh"
         marginTop={3}        
       >       
-        <TextField fullWidth label="Titulo" onChange={onChangeTitle}  variant="outlined" size='small' type="text"/>
-
+        <TextField label="Titulo" onChange={onChangeTitle}  variant="outlined" size='small' type="text" multiline maxRows={2}/>
         <TextField label="Autor" onChange={onChangeAuthor} variant="outlined" size='small' type="text"/>
-        <TextField label="Enlace" onChange={onChangeUrl} variant="outlined" size='small' type="text"/>
+        <TextField label="Enlace" onChange={onChangeUrl} variant="outlined" size='small' type="text"  />
+        <TextField label="Url de Imagen" onChange={onChangePicUrl} variant="outlined" size='small' type="text"/>
+        <TextField label="Descripción" onChange={onChangeDesc} variant="outlined" size='small' type="text" multiline maxRows={4}/>
        
         <Button variant="contained" type='submit' color="success">Guardar</Button>
       </Box>
