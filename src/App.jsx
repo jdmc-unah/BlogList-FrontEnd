@@ -5,10 +5,11 @@ import blogService from './services/blogs'
 import loginService from './services/login'
 
 //Componentes
-import Blog from './components/Blog'
-import BlogForm from './components/BlogForm'
-import Toggable from './components/Toggable'
-import Notification from './components/Notification'
+import Blog from './components/home_components/Blog'
+import BlogForm from './components/home_components/BlogForm'
+import Toggable from './components/home_components/Toggable'
+import Notification from './components/home_components/Notification'
+import HomeAppBar from './components/home_components/HomeAppBar'
 
 //Estilos
 import Container from '@mui/material/Container';
@@ -23,7 +24,6 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid'
 
 
-import HomeAppBar from './components/HomeAppBar'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])

@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Grid from '@mui/material/Grid'
 
-import categories from '../localdata/categories'
+import categories from '../../localdata/categories'
 
 
 const BlogForm = ({createBlog})=>{

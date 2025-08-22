@@ -8,7 +8,7 @@ import FormLabel from '@mui/material/FormLabel';
 
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import categories from '../localdata/categories'
+import categories from '../../localdata/categories'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 
