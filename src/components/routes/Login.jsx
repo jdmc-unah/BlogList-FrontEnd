@@ -18,6 +18,8 @@ import loginService from '../../services/login'
 import { useState, useEffect, useContext } from 'react'
 import {AuthContext} from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom';
+
+
   
 
 
@@ -51,32 +53,33 @@ import { useNavigate } from 'react-router-dom';
 
 
     const handleLogin = async (event) => {
-    event.preventDefault()
-    
-    try {
-      const user = await loginService.login({
-        username, password,
-      })
+        event.preventDefault()
+        
+        try {
+        const user = await loginService.login({
+            username, password,
+        })
 
-      window.localStorage.setItem('loggedUser', JSON.stringify(user))
+        window.localStorage.setItem('loggedUser', JSON.stringify(user))
 
-      
-      blogService.setToken(user.token)
+        
+        blogService.setToken(user.token)
 
-      setUser(user)
-      setUsername('')
-      setPassword('')
+        setUser(user)
+        setUsername('')
+        setPassword('')
 
-              //   navigate('/')
+                //   navigate('/')
 
-    } catch (exception) {
-      
-      setMessage('Credenciales Incorrectas')
-      setErrorMessage(true)
-      clearMessage()
-      
+        } catch (exception) {
+        
+        setMessage('Credenciales Incorrectas')
+        setErrorMessage(true)
+        clearMessage()
+        
+        }
     }
-  }
+
 
     return(
         <>
@@ -151,6 +154,13 @@ import { useNavigate } from 'react-router-dom';
             />
            
             <Button variant="contained" type='submit'>Entrar</Button>
+        </Box>
+
+        <Box sx={{display:'flex', flexDirection:'column', alignItems:'center' }} >
+            <Typography variant="body1" color="initial">
+                ¿No tienes una cuenta? 
+                <Button color="primary" onClick={()=>{ navigate('/')}} > Regístrate</Button> 
+            </Typography>
         </Box>
         </Container>
         </>   
