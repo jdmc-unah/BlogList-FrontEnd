@@ -15,6 +15,17 @@ const getAll = async () => {
 }
 
 
+const filterBlogs = async (filter) =>{
+   const config = {
+    headers: { Authorization: token },
+  }
+  const response = await axios.post(`${baseUrl}/filter`, filter, config)
+  
+  return response.data
+
+}
+
+
 const getBlog = async (id)=>{
   const response = await axios.get(`${baseUrl}/${id}`)
   return response.data
@@ -50,4 +61,4 @@ const deleteBlog = async(id) =>{
 
 
 
-export default {setToken, getAll,getBlog, create , update, deleteBlog}
+export default {setToken, getAll,getBlog, create , update, deleteBlog, filterBlogs}

@@ -30,8 +30,6 @@ import { useNavigate } from 'react-router-dom';
 
   
 
-
-
   const RegisterForm = () => {
     const [name, setName] = useState([])
     const [username, setUsername] = useState([])
@@ -66,7 +64,7 @@ import { useNavigate } from 'react-router-dom';
         event.preventDefault()
         
         try {
-            const newUser = await registerService.register({ username, password, name })
+            await registerService.register({ username, password, name })
 
             try {
                 const user = await loginService.login({username, password})
@@ -75,13 +73,10 @@ import { useNavigate } from 'react-router-dom';
 
                 setUser(user)
                 navigate('/') 
-
             } catch (exception) {
-            
                 setMessage('Error de login')
                 setErrorMessage(true)
                 clearMessage()
-            
             }
 
         } catch (error) {
@@ -89,110 +84,104 @@ import { useNavigate } from 'react-router-dom';
             setErrorMessage(true)
             clearMessage()
         }
-
-
-        
     }
+
+
 
     return(
         <>
     
-        <Container maxWidth="sm">
-        
-        <Notification  message={message}  error= {errorMessage}/>
+            <Container maxWidth="sm">
+            
+            <Notification  message={message}  error= {errorMessage}/>
 
+            <Box
+                display="flex"
+                flexDirection="column"
+                justifyContent="space-around"
+                paddingLeft={2}
+                marginTop={5}
+                
+            >
+                <IconButton sx={{width:25, pb:5 }}  size='small' aria-label="" onClick={()=>{ navigate('/') } }>
+                <ArrowBackIcon/>
+                </IconButton>            
+                <Typography variant="h4" gutterBottom>
+                    Registro
+                </Typography>
+                
+                <Typography variant="subtitle1" color='primary' gutterBottom>
+                    Ingresa los datos debajo para poder ingresar
+                </Typography>
+                
+            </Box>
 
-        <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="space-around"
-            paddingLeft={2}
-            marginTop={5}
-            
-        >
-            <IconButton sx={{width:25, pb:5 }}  size='small' aria-label="" onClick={()=>{ navigate('/') } }>
-              <ArrowBackIcon/>
-            </IconButton>            
-            <Typography variant="h4" gutterBottom>
-                Registro
-            </Typography>
-            
-            <Typography variant="subtitle1" color='primary' gutterBottom>
-                Ingresa los datos debajo para poder ingresar
-            </Typography>
-            
-        </Box>
+            <Box
+                onSubmit={handleRegister}
 
-        <Box
-            onSubmit={handleRegister}
-
-            component="form"
-            sx={{ '& > :not(style)': { m: 1, width: '35ch' } }}
-            noValidate
-            autoComplete="off"
-            display="flex"
-            flexDirection="column"
-            justifyContent="space-evenly"
-            alignItems="center"
-            minHeight="40vh"
-            
-            
-        >
-            
-            <TextField value={name} label="Nombre" onChange={({ target }) => setName(target.value)}
-            name="Name"
-            variant="outlined" 
-            size='small'
-            type="text"
-            slotProps={{
-                input: {
-                startAdornment:(
-                    <InputAdornment position="start">
-                    <SentimentVerySatisfiedIcon />
-                    </InputAdornment>
-                )
-                },
-            }} 
-            />
-
-            <TextField value={username} label="Usuario" onChange={({ target }) => setUsername(target.value)}
-            name="Username"
-            variant="outlined" 
-            size='small'
-            type="text"
-            slotProps={{
-                input: {
-                startAdornment:(
-                    <InputAdornment position="start">
-                    <AccountCircle />
-                    </InputAdornment>
-                )
-                },
+                component="form"
+                sx={{ '& > :not(style)': { m: 1, width: '35ch' } }}
+                noValidate
+                autoComplete="off"
+                display="flex"
+                flexDirection="column"
+                justifyContent="space-evenly"
+                alignItems="center"
+                minHeight="40vh"
+            >
+                
+                <TextField value={name} label="Nombre" onChange={({ target }) => setName(target.value)}
+                name="Name"
+                variant="outlined" 
+                size='small'
+                type="text"
+                slotProps={{
+                    input: {
+                    startAdornment:(
+                        <InputAdornment position="start">
+                        <SentimentVerySatisfiedIcon />
+                        </InputAdornment>
+                    )
+                    },
                 }} 
-            />
+                />
 
-        
-            <TextField value={password} label="Contraseña" onChange={({ target }) => setPassword(target.value)}
-            name="password"
-            variant="outlined" 
-            size='small'
-            type="password"
-            slotProps={{
-                input: {
-                startAdornment:(
-                    <InputAdornment position="start">
-                    <LockIcon />
-                    </InputAdornment>
-                )
-                },
-            }} 
-            />
+                <TextField value={username} label="Usuario" onChange={({ target }) => setUsername(target.value)}
+                name="Username"
+                variant="outlined" 
+                size='small'
+                type="text"
+                slotProps={{
+                    input: {
+                    startAdornment:(
+                        <InputAdornment position="start">
+                        <AccountCircle />
+                        </InputAdornment>
+                    )
+                    },
+                    }} 
+                />
 
             
-           
-            <Button variant="contained" type='submit'>Registrarse</Button>
-        </Box>
-        </Container>
+                <TextField value={password} label="Contraseña" onChange={({ target }) => setPassword(target.value)}
+                name="password"
+                variant="outlined" 
+                size='small'
+                type="password"
+                slotProps={{
+                    input: {
+                    startAdornment:(
+                        <InputAdornment position="start">
+                        <LockIcon />
+                        </InputAdornment>
+                    )
+                    },
+                }} 
+                />
+
+                <Button variant="contained" type='submit'>Registrarse</Button>
+            </Box>
+            </Container>
         </>   
     ) 
     }

@@ -1,8 +1,10 @@
 
 
 import { useState, useEffect, useContext } from 'react'
-import blogService from '../../services/blogs'
 import {AuthContext} from '../../context/AuthContext'
+
+import blogService from '../../services/blogs'
+
 
 //Componentes
 import Blog from '../home_components/Blog'
@@ -11,22 +13,24 @@ import Toggable from '../home_components/Toggable'
 import Notification from '../home_components/Notification'
 import HomeAppBar from '../home_components/HomeAppBar'
 import Grid from '@mui/material/Grid'
+import Button from '@mui/material/Button'
 
 
 const Home = ()=>{
     const [blogs, setBlogs] = useState([])
     const { user, setUser } = useContext(AuthContext);
     
+    const [filter, setFilter] = useState({filter: 'all', order: 'popular' , cat: '' }) //*
+
     const [message, setMessage] = useState(null)
     const [errorMessage, setErrorMessage] = useState(false)
     
 
-
     useEffect(() => {
-        blogService.getAll().then(blogs =>
-        setBlogs( sortBlogs( blogs) )
-        )  
-    }, [])
+        // blogService.getAll().then(blogs =>
+        sortBlogs().then((blogs) => setBlogs(blogs) )
+        // )  
+    }, filter)
 
     const clearMessage = () =>{
         setTimeout(() => {
@@ -38,7 +42,7 @@ const Home = ()=>{
     const createBlog = async (newBlog)=>{
         try {    
         const blogCreated = await blogService.create(newBlog)
-        setBlogs( sortBlogs( blogs.concat(blogCreated)) )
+        setBlogs( blogs.concat(blogCreated))
         
         setMessage('El blog fue creado con exito')
         setErrorMessage(false)
@@ -55,11 +59,12 @@ const Home = ()=>{
     }
     
     const likeBlog = async(blogID, blogToUpdate) =>{
-        await blogService.update(blogID, blogToUpdate)
-        const updatedBlogList = blogs.filter(blog => blog.id !== blogID )
-        const updatedBlog = await blogService.getBlog(blogID) 
-        setBlogs( sortBlogs(updatedBlogList.concat(updatedBlog) ) )
+        const blogsNoUpdate = blogs.filter(blog => blog.id !== blogID )
+        const updatedBlog =  await blogService.update(blogID, blogToUpdate) 
         
+        const updatedBlogList = blogsNoUpdate.concat(updatedBlog)
+        setBlogs(updatedBlogList.sort ( (a, b) => b.likes - a.likes ) )
+
     }
 
     const deleteBlog = async(blogToDelete)=>{
@@ -68,7 +73,7 @@ const Home = ()=>{
             try {
             const deletedBlog = await blogService.deleteBlog(blogToDelete.id)  
                 
-            setBlogs( sortBlogs( blogs.filter( blog => blog.id !== deletedBlog.id )) )
+            setBlogs(  blogs.filter( blog => blog.id !== deletedBlog.id ) )
 
             setMessage(`El blog ${deletedBlog.title} fue borrado con exito `)
             setErrorMessage(false)
@@ -84,9 +89,15 @@ const Home = ()=>{
     }
 
       
-    const sortBlogs = (blogs)=>{
-        return blogs.sort ( (a, b) => b.likes - a.likes ) 
+    const sortBlogs = async (blogs)=>{
+      
+      const filteredBlogs = await blogService.filterBlogs(filter)
+      return filteredBlogs
+
     }
+
+
+
 
 
      const logout = ()=>{
@@ -106,7 +117,7 @@ const Home = ()=>{
         <div>
           
          
-          <HomeAppBar logout={logout} userName={user.name} />
+          <HomeAppBar logout={logout} userName={user.name} setFilter={setFilter}   />
           <br /><br /><br />
 
           <Notification  message={message}  error= {errorMessage} />
@@ -132,10 +143,8 @@ const Home = ()=>{
             justifyContent="center"
             alignItems="center"
             alignContent="center"
-            wrap="wrap"
-            
+            wrap="wrap" 
           >
-            
               {blogs.map(blog =>
                 <Grid key={blog.id} size={{sm:6, lg: 4, md:6, xl: 4, xs: 12  }}  >
                   <Blog key={blog.id} blog={blog} likeBlog ={likeBlog} deleteBlog= {deleteBlog} />    
@@ -143,6 +152,10 @@ const Home = ()=>{
               )}
             
           </Grid>
+
+          <Button variant="text" onClick={()=> setFilter({filter: 'all', order: 'title' , cat: '' }) } color="primary">
+            cambiar filtro prueba
+          </Button>
 
         </div>
     )

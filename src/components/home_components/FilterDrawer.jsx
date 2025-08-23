@@ -13,27 +13,44 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 
 
-const DrawerFilter= () => {
-    const [filter, setFilter] = useState(0); 
-    const [orderBy, setOrderBy] = useState(0); 
+const DrawerFilter= ({setFilter}) => {
+    
+    const [filterBy, setFilterBy] = useState('all'); 
+    const [orderBy, setOrderBy] = useState('popular'); 
     const [category, setCat] = useState('');
 
     const handleChangeFilter = (event) => {
-        setFilter(event.target.value);
+        setFilterBy(event.target.value)
+        updateFilter()
     };
 
     const handleChangeOrderBy = (event) => {
-        setOrderBy(event.target.value);
+        setOrderBy(event.target.value)
+        updateFilter()
     };
 
     const handleChangeCat = (event) => {
-        setCat(event.target.value);
+        setCat(event.target.value)
+        updateFilter()
     };
+
+    const updateFilter= ()=>{
+        const newFilter = {
+            filter: filterBy, 
+            order: orderBy , 
+            cat: category 
+
+        }
+
+        console.log(newFilter);
+        
+        setFilter(newFilter)
+    }
 
 
     const handleRestart =()=>{
-        setFilter(0)
-        setOrderBy(0)
+        setFilter('all')
+        setOrderBy('popular')
         setCat('')
     }
 
@@ -49,25 +66,25 @@ const DrawerFilter= () => {
             <RadioGroup
                 aria-labelledby="filter"
                 name="filter"
-                value={filter}
+                value={filterBy}
                 onChange={handleChangeFilter}
             >
-                <FormControlLabel value={1} control={<Radio />} label="Todos" />
+                <FormControlLabel value={'all'} control={<Radio />} label="Todos" />
                 
-                <FormControlLabel value={2} control={<Radio />} label="Mis Blogs" />
+                <FormControlLabel value={'my blogs'} control={<Radio />} label="Mis Blogs" />
             </RadioGroup>
         </FormControl>
         <FormControl>
-            <FormLabel id="filter">Ordenar por</FormLabel>
+            <FormLabel id="orderby">Ordenar por</FormLabel>
             <RadioGroup
-                aria-labelledby="filter"
-                name="filter"
+                aria-labelledby="orderby"
+                name="orderby"
                 value={orderBy}
                 onChange={handleChangeOrderBy}
             >
-                <FormControlLabel value={1} control={<Radio />} label="Populares" />
-                <FormControlLabel value={2} control={<Radio />} label="Titulo" />
-                <FormControlLabel value={3} control={<Radio />} label="Autor" />
+                <FormControlLabel value={'popular'} control={<Radio />} label="Populares" />
+                <FormControlLabel value={'title'} control={<Radio />} label="Titulo" />
+                <FormControlLabel value={'author'} control={<Radio />} label="Autor" />
             </RadioGroup>
         </FormControl>
         
@@ -81,6 +98,7 @@ const DrawerFilter= () => {
                 // label="Categoría" 
                 value={category} onChange={handleChangeCat}
                 variant="outlined" size='small' type="text" >
+                     <MenuItem key={''} value= {''} >  </MenuItem>  
                     {categories.map((cat)=> (
                     <MenuItem key={cat.value} value={cat.value} > {cat.label}  </MenuItem>  
                     ) )}

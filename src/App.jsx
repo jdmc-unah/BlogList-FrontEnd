@@ -1,4 +1,5 @@
-import { useState, useContext } from 'react'
+//Contexto
+import { useContext } from 'react'
 import {AuthContext} from './context/AuthContext'
 
 //Routes
@@ -7,21 +8,13 @@ import Login from './components/routes/Login'
 import Register from './components/routes/Register'
 
 
-
 //React Router
 import {
   BrowserRouter as Router,
   Routes, Route, Link
 } from 'react-router-dom'
 
-import {
-  useNavigate
-} from 'react-router-dom'
-
-
 const App = () => {
- 
-  
   const { user } = useContext(AuthContext);
   
 

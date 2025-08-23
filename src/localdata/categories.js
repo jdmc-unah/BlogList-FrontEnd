@@ -5,16 +5,16 @@
         label: 'Arte',
       },
       {
-        value: 'Finanzas ',
-        label: 'Finanzas ',
+        value: 'Finanzas',
+        label: 'Finanzas',
       },
       {
         value: 'Gastronomía',
         label: 'Gastronomía',
       },
       {
-        value: 'Negocios ',
-        label: 'Negocios ',
+        value: 'Negocios',
+        label: 'Negocios',
       },
       {
         value: 'Noticias',
