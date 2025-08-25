@@ -5,7 +5,6 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import { red } from '@mui/material/colors';
 
 import Collapse from '@mui/material/Collapse';
 import { styled } from '@mui/material/styles';
@@ -20,10 +19,21 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CategoryIcon from '@mui/icons-material/Category';
 
+import ConfirmDialog from "./ConfirmDialog";
 
 
-const Blog = ({ blog, likeBlog, deleteBlog }) => {
-  const [expanded, setExpanded] = useState(false);
+
+
+const Blog = ({ blog, likeBlog, deleteBlog, userID }) => {
+  
+
+  //*Confirm Dialog
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -34,11 +44,8 @@ const Blog = ({ blog, likeBlog, deleteBlog }) => {
     await likeBlog(blog.id, blog)
   }
 
-  const handleDeleteBlog = async()=>{
-    deleteBlog(blog)
-  }
-
-
+  //* Expand animation
+  const [expanded, setExpanded] = useState(false);
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -64,19 +71,17 @@ const Blog = ({ blog, likeBlog, deleteBlog }) => {
       }));
 
 
+
+  
+ 
   return (
     <>
     
       <Card sx={{mb:1}} >
          <CardHeader
-            // avatar={
-            //   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            //     {blog.author[0]}
-            //   </Avatar>
-            // }
-             
+          
             title={blog.title}
-            slotProps={{title:{ sx:{fontSize: '1.2rem' }            }}}
+            slotProps={{title:{ sx:{fontSize: '1.2rem' }}}}
             subheader={` ${blog.author} ` }
             action={ 
               <>
@@ -117,14 +122,18 @@ const Blog = ({ blog, likeBlog, deleteBlog }) => {
             <Typography variant="body2" color="text.secondary" textAlign={'center'} > {blog.category} </Typography>
             <Box sx={{ flexGrow: 1 }} />
             <Button href={blog.url}  target="_blank" variant='outlined' size="small">Ir al blog</Button>
-            <Button onClick={handleDeleteBlog}  variant='outlined' size="small">Borrar</Button>
+            
+            {/* Solo aparece si el blog pertenece al usuario */}
+             { blog.user.id == userID && <Button onClick={handleClickOpen}  variant='outlined' size="small">Borrar</Button> }
+        
         </CardActions>
         </Collapse>
         
        
       </Card>
     
-
+      <ConfirmDialog open={open} setOpen={setOpen} handleAccept={()=> deleteBlog(blog)} />
+      
 
     
 

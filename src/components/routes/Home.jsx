@@ -66,7 +66,7 @@ const Home = ()=>{
 
     const deleteBlog = async(blogToDelete)=>{
     
-        if (window.confirm(`Esta seguro que desea borrar el blog: ${blogToDelete.title}`) ) {
+        // if (window.confirm(`Esta seguro que desea borrar el blog: ${blogToDelete.title}`) ) {
             try {
             const deletedBlog = await blogService.deleteBlog(blogToDelete.id)  
                 
@@ -82,11 +82,14 @@ const Home = ()=>{
             clearMessage()
             }
 
-        } 
+        // } 
     }
 
       
-    const sortBlogs = async (blogs)=>{
+    const sortBlogs = async ()=>{
+      console.log(blogs);
+      console.log(user);
+
       
       const filteredBlogs = await blogService.filterBlogs(filter)
       return filteredBlogs
@@ -132,7 +135,9 @@ const Home = ()=>{
           >
               {blogs.map(blog =>
                 <Grid key={blog.id} size={{sm:6, lg: 4, md:6, xl: 4, xs: 12  }}  >
-                  <Blog key={blog.id} blog={blog} likeBlog ={likeBlog} deleteBlog= {deleteBlog} />    
+                  <Blog key={blog.id} blog={blog} userID={user.id} likeBlog ={likeBlog} deleteBlog= {deleteBlog} /> 
+                  
+                     
                 </Grid>
               )}
             
