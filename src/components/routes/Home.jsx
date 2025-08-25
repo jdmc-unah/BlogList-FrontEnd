@@ -87,10 +87,7 @@ const Home = ()=>{
 
       
     const sortBlogs = async ()=>{
-      // console.log(blogs);
-      // console.log(user);
-
-      
+    
       const filteredBlogs = await blogService.filterBlogs(filter)
       return filteredBlogs
 

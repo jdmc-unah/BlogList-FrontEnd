@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import { Collapse } from '@mui/material';
+import { Collapse, Fab } from '@mui/material';
 
 
 const Toggable = (props) => {
@@ -34,6 +34,14 @@ const Toggable = (props) => {
           <Button  startIcon={<HighlightOffIcon/>} variant='contained' size='small' color='error' 
           onClick={toggleVisibility}>Cerrar</Button>  }
           
+          {/* <Fab
+            color="primary"
+            aria-label=""  //todo>> cambiar el diseño para que quede con un floating button
+            
+          >
+            +
+             <Icon /> 
+          </Fab> */}
         </Box>
       <Collapse in={visible}>
         
