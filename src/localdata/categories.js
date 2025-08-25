@@ -29,6 +29,15 @@
         label: 'Viajes',
       },
       
+      {
+        value: 'Entretenimiento',
+        label: 'Entretenimiento',
+      },
+      {
+        value: 'Desarrollo Personal',
+        label: 'Desarrollo Personal',
+      },
+      
     ];
      
 

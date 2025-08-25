@@ -157,7 +157,7 @@ import { useNavigate } from 'react-router-dom';
         <Box sx={{display:'flex', flexDirection:'column', alignItems:'center' }} >
             <Typography variant="body1" color="initial">
                 ¿No tienes una cuenta? 
-                <Button color="primary" onClick={()=>{ navigate('/')}} > Regístrate</Button> 
+                <Button color="primary" onClick={()=>{ navigate('/register')}} > Regístrate</Button> 
             </Typography>
         </Box>
         </Container>

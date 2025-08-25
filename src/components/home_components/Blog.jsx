@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState , useEffect} from "react"
 
 
 import Card from '@mui/material/Card';
@@ -15,11 +15,13 @@ import Button from '@mui/material/Button';
 
 //Iconos
 import IconButton from '@mui/material/IconButton';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CategoryIcon from '@mui/icons-material/Category';
 
 import ConfirmDialog from "./ConfirmDialog";
+import { useStepContext } from "@mui/material";
 
 
 
@@ -29,6 +31,10 @@ const Blog = ({ blog, likeBlog, deleteBlog, userID }) => {
 
   //*Confirm Dialog
   const [open, setOpen] = useState(false);
+
+  //*Usuarios que han dado like
+  const [userLike, setUserLike] = useState([]);
+  useEffect( ()=>{ setUserLike( blog.userLikes.find(id => id == userID)) }, [userLike] )
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -40,8 +46,20 @@ const Blog = ({ blog, likeBlog, deleteBlog, userID }) => {
   };
 
   const increaseLikes = async ()=>{
-    blog.likes = blog.likes + 1
-    await likeBlog(blog.id, blog)
+    
+    if (!userLike) {  
+      blog.likes = blog.likes + 1
+      blog.userLikes = blog.userLikes.concat(userID)
+      setUserLike(blog.userLikes)
+      await likeBlog(blog.id, blog)
+    }else{
+
+      blog.likes = blog.likes - 1
+      blog.userLikes = blog.userLikes.filter( id => id != userID   )
+      setUserLike(blog.userLikes)
+      await likeBlog(blog.id, blog)
+
+    }
   }
 
   //* Expand animation
@@ -89,7 +107,7 @@ const Blog = ({ blog, likeBlog, deleteBlog, userID }) => {
                   
                   <Box sx={{display:'flex'  }} >
                     <IconButton color="error" size="small" aria-label="add to favorites" onClick={increaseLikes}>
-                      <FavoriteIcon />  {blog.likes}
+                     {!userLike ? <FavoriteBorderIcon /> : <FavoriteIcon/> }     {blog.likes}
                     </IconButton>
                     <ExpandMore
                       expand={expanded}
