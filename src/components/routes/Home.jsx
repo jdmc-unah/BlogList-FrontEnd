@@ -19,7 +19,7 @@ const Home = ()=>{
     const [blogs, setBlogs] = useState([])
     const { user, setUser } = useContext(AuthContext);
     
-    const [filter, setFilter] = useState({filter: 'all', order: 'popular' , cat: '' }) //*
+    const [filter, setFilter] = useState({filter: 'all', order: 'popular' , cat: 'all' }) //*
 
     const [message, setMessage] = useState(null)
     const [errorMessage, setErrorMessage] = useState(false)
@@ -39,6 +39,8 @@ const Home = ()=>{
     const createBlog = async (newBlog)=>{
         try {    
         const blogCreated = await blogService.create(newBlog)
+        console.log(blogCreated);
+        
         setBlogs( blogs.concat(blogCreated))
         
         setMessage('El blog fue creado con exito')
@@ -66,29 +68,27 @@ const Home = ()=>{
 
     const deleteBlog = async(blogToDelete)=>{
     
-        // if (window.confirm(`Esta seguro que desea borrar el blog: ${blogToDelete.title}`) ) {
-            try {
-            const deletedBlog = await blogService.deleteBlog(blogToDelete.id)  
-                
-            setBlogs(  blogs.filter( blog => blog.id !== deletedBlog.id ) )
+      try {
+      const deletedBlog = await blogService.deleteBlog(blogToDelete.id)  
+          
+      setBlogs(  blogs.filter( blog => blog.id !== deletedBlog.id ) )
 
-            setMessage(`El blog ${deletedBlog.title} fue borrado con exito `)
-            setErrorMessage(false)
-            clearMessage()
-            
-            } catch (error) {
-            setMessage(`Error: no tiene autorización para borrar el blog`)
-            setErrorMessage(true)
-            clearMessage()
-            }
+      setMessage(`El blog ${deletedBlog.title} fue borrado con exito `)
+      setErrorMessage(false)
+      clearMessage()
+      
+      } catch (error) {
+      setMessage(`Error: no tiene autorización para borrar el blog`)
+      setErrorMessage(true)
+      clearMessage()
+      }
 
-        // } 
     }
 
       
     const sortBlogs = async ()=>{
-      console.log(blogs);
-      console.log(user);
+      // console.log(blogs);
+      // console.log(user);
 
       
       const filteredBlogs = await blogService.filterBlogs(filter)

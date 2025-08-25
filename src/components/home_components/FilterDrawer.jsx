@@ -94,7 +94,7 @@ const DrawerFilter= ({ filter, setFilter}) => {
                 defaultValue="Arte"
                 value={category} onChange={handleChangeCat}
                 variant="outlined" size='small' type="text" >
-                     <MenuItem key={''} value= {''} >  </MenuItem>  
+                     <MenuItem key={'all'} value= {'all'} > Todas </MenuItem>  
                     {categories.map((cat)=> (
                     <MenuItem key={cat.value} value={cat.value} > {cat.label}  </MenuItem>  
                     ) )}
