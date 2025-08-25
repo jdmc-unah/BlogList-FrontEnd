@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography'
 
 
 
-const HomeAppBar = ({logout, userName, setFilter})=>{
+const HomeAppBar = ({logout, userName, setFilter, filter})=>{
     //* Drawer
     const [open, setOpen] = useState(false);
 
@@ -27,7 +27,7 @@ const HomeAppBar = ({logout, userName, setFilter})=>{
              <AppBar position="fixed">
                 <Toolbar>
                     <Drawer open={open} onClose={toggleDrawer(false)}>
-                        <DrawerFilter toggleDrawer={toggleDrawer} setFilter={setFilter}/>
+                        <DrawerFilter toggleDrawer={toggleDrawer} setFilter={setFilter} filter={filter}/>
                     </Drawer>
                     
                     <IconButton onClick={toggleDrawer(true)}> <FilterListIcon  /> </IconButton>  {/*//todo cambiarle el color */}

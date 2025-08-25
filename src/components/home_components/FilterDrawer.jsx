@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -13,45 +13,42 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 
 
-const DrawerFilter= ({setFilter}) => {
+const DrawerFilter= ({ filter, setFilter}) => {
     
-    const [filterBy, setFilterBy] = useState('all'); 
-    const [orderBy, setOrderBy] = useState('popular'); 
-    const [category, setCat] = useState('');
+    const [filterBy, setFilterBy] = useState(filter.filter); 
+    const [orderBy, setOrderBy] = useState(filter.order); 
+    const [category, setCat] = useState(filter.cat);
 
-    const handleChangeFilter = (event) => {
-        setFilterBy(event.target.value)
-        updateFilter()
-    };
-
-    const handleChangeOrderBy = (event) => {
-        setOrderBy(event.target.value)
-        updateFilter()
-    };
-
-    const handleChangeCat = (event) => {
-        setCat(event.target.value)
-        updateFilter()
-    };
 
     const updateFilter= ()=>{
         const newFilter = {
             filter: filterBy, 
             order: orderBy , 
             cat: category 
-
         }
-
-        console.log(newFilter);
         
         setFilter(newFilter)
     }
 
+    useEffect(()=> updateFilter(),[filterBy, orderBy, category])
+
+    const handleChangeFilter = (event) => {
+        setFilterBy(event.target.value)
+    };
+
+    const handleChangeOrderBy = (event) => {
+        setOrderBy(event.target.value)
+    };
+
+    const handleChangeCat = (event) => {
+        setCat(event.target.value)
+    };
+
 
     const handleRestart =()=>{
-        setFilter('all')
+        setFilterBy('all')
         setOrderBy('popular')
-        setCat('')
+        setCat('')    
     }
 
     
@@ -95,7 +92,6 @@ const DrawerFilter= ({setFilter}) => {
                 id="category"
                 select
                 defaultValue="Arte"
-                // label="Categoría" 
                 value={category} onChange={handleChangeCat}
                 variant="outlined" size='small' type="text" >
                      <MenuItem key={''} value= {''} >  </MenuItem>  

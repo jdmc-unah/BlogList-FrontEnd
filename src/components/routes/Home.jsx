@@ -13,7 +13,6 @@ import Toggable from '../home_components/Toggable'
 import Notification from '../home_components/Notification'
 import HomeAppBar from '../home_components/HomeAppBar'
 import Grid from '@mui/material/Grid'
-import Button from '@mui/material/Button'
 
 
 const Home = ()=>{
@@ -27,10 +26,8 @@ const Home = ()=>{
     
 
     useEffect(() => {
-        // blogService.getAll().then(blogs =>
         sortBlogs().then((blogs) => setBlogs(blogs) )
-        // )  
-    }, filter)
+    }, [filter])
 
     const clearMessage = () =>{
         setTimeout(() => {
@@ -96,28 +93,16 @@ const Home = ()=>{
 
     }
 
-
-
-
-
      const logout = ()=>{
         window.localStorage.clear()
         setUser(null)
     } 
 
-
-    
-    
-    
-
-    
-
-
     return(
         <div>
           
          
-          <HomeAppBar logout={logout} userName={user.name} setFilter={setFilter}   />
+          <HomeAppBar logout={logout} userName={user.name} setFilter={setFilter} filter={filter}   />
           <br /><br /><br />
 
           <Notification  message={message}  error= {errorMessage} />
@@ -153,9 +138,7 @@ const Home = ()=>{
             
           </Grid>
 
-          <Button variant="text" onClick={()=> setFilter({filter: 'all', order: 'title' , cat: '' }) } color="primary">
-            cambiar filtro prueba
-          </Button>
+          
 
         </div>
     )
